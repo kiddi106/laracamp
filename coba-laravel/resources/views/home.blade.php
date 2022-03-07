@@ -18,7 +18,7 @@
      </div>
     </div>
     <div class="gambar">
-     <img src="/img/tst1.png" width="100%"  alt="">
+     <img src="/img/tst1.png" width="100%"   alt="">
     </div>
     
    </div>

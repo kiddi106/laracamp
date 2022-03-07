@@ -24,6 +24,8 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('deleted_by');
 
         });
     }
