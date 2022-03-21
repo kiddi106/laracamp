@@ -10,6 +10,7 @@ use App\Models\OrderPickUp;
 use App\Models\OrderReceiver;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +54,52 @@ class PickpackController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        $validated = $request->validate(['document_number'=> 'required', 
+        'purchase_type_id'=>'required',
+        'awb'=>'required',
+        'notes'=>'required',
+        'customer_number'=>'required',
+        'receiver_name'=>'required',
+        'receiver_phone'=>'required',
+        'receiver_postal_code'=>'required']);
+        
+        // $order=new Order();
+        // $order->order_number='15';
+        // $order->status_id='1';
+        // $order->customer_number= $request->customer_number;
+        // $order->purchase_type_id = $request->purchase_type_id;
+        // $order->document_number = $request->document_number;
+        // $order->awb = $request->awb;
+        // $order->notes = $request->notes;
+        // $order->created_by = Auth::user()->id;
+        // $order->save();
+        // if ($order->save()) {
+        //     $receive= new OrderReceiver();
+        //     $receive->order_id= $order->id;
+        //     $receive->name = $request->receiver['name'];
+        //     $receive->phone=$request->receiver['phone'];
+        //     $receive->postal_code=$request->receiver['postal_code'];
+        //     $receive->destination=$request->receiver['destination'];
+        //     $receive->created_by = Auth::user()->id;
+        //     $receive->save();
+
+        //     $delivery = new OrderDelivery();
+        //     $delivery->order_id=$order->id;
+        //     $delivery->type=$request->delivery['type'];
+        //     $delivery->do_date=$request->delivery['do_date'];
+        //     $delivery->created_by = Auth::user()->id;
+            
+        //       $delivery->save();
+
+        //     return redirect()->route('pickpack.index')->with('alert.success', 'Data has Been Saved');
+        // }
+
+
+
+
+    
+        
     }
 
     /**

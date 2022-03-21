@@ -137,18 +137,27 @@
 
                                     <div class="form-group">
                                         <label for="document_number">Document Number</label>
-                                        <input type="text" class="form-control" id="document_number" name="document_number" @if ($model->exists) value="{{ $model->document_number }}" @endif placeholder="Document Number">
+                                        <input type="text" class="form-control @error('document_number') is-invalid @enderror" id="document_number" name="document_number" @error('document_number') value="{{ old('document_number') }}" @enderror @if ($model->exists) value="{{ $model->document_number }}" @endif  placeholder="Document Number" >
                                     </div>
+                                    @error('document_number')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="awb">AWB</label>
-                                        <input type="text" class="form-control" id="awb" name="awb" @if ($model->exists) value="{{ $model->awb }}" @endif placeholder="Airway Bill">
+                                        <input type="text" class="form-control @error('awb') is-invalid @enderror" id="awb" name="awb" @if ($model->exists) value="{{ $model->awb }}" @endif placeholder="Airway Bill">
                                     </div>
+                                    @error('awb')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="notes">Notes</label>
-                                        <textarea name="notes" id="notes" class="form-control">{{ $model->exists ? $model->notes : '' }}</textarea>
+                                        <textarea name="notes" id="notes" class="form-control @error('notes') is-invalid @enderror">{{ $model->exists ? $model->notes : '' }}</textarea>
                                     </div>
+                                    @error('notes')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                 </div>
                             </div>
@@ -164,28 +173,43 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="customer_number">Customer Number</label>
-                                        <input type="text" class="form-control" id="customer_number" name="customer_number" @if ($model->exists) value="{{ $model->customer_number }}" @endif placeholder="Customer Number">
+                                        <input type="text" class="form-control @error('customer_number') is-invalid @enderror" id="customer_number" name="customer_number" @if ($model->exists) value="{{ $model->customer_number }}" @endif placeholder="Customer Number">
                                     </div>
+                                    @error('customer_number')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="receiver_name">Customer Name</label>
-                                        <input type="text" class="form-control" id="receiver_name" name="receiver[name]" @if ($model->exists) value="{{ $model->receiver->name }}" @endif placeholder="Customer Name">
+                                        <input type="text" class="form-control @error('receiver[name]') is-invalid @enderror" id="receiver_name" name="receiver[name]" @if ($model->exists) value="{{ $model->receiver->name }}" @endif placeholder="Customer Name" required>
                                     </div>
+                                    @error('receiver["name"]')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="receiver_phone">Phone Number</label>
-                                        <input type="text" class="form-control" id="receiver_phone" name="receiver[phone]" @if ($model->exists) value="{{ $model->receiver->phone }}" @endif placeholder="08xxx">
+                                        <input type="text" class="form-control @error('receiver[phone]') is-invalid @enderror" id="receiver_phone" name="receiver[phone]" @if ($model->exists) value="{{ $model->receiver->phone }}" @endif  placeholder="08xxx" required>
                                     </div>
+                                    @error('receiver_phone') 
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="receiver_postal_code">Postal Code</label>
-                                        <input type="text" class="form-control" id="receiver_postal_code" name="receiver[postal_code]" @if ($model->exists) value="{{ $model->receiver->postal_code }}" @endif placeholder="123456">
+                                        <input type="text" class="form-control @error('receiver[postal_code]') is-invalid @enderror" id="receiver_postal_code" name="receiver[postal_code]" @if ($model->exists) value="{{ $model->receiver->postal_code }}" @endif placeholder="123456">
                                     </div>
+                                    @error('receiver["postal_code"]')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="receiver_destination">Destination</label>
-                                        <textarea name="receiver[destination]" class="form-control">{{ $model->exists ? $model->receiver->destination : '' }}</textarea>
+                                        <textarea name="receiver[destination]" class="form-control @error('receiver[destination]') is-invalid @enderror" required>{{ $model->exists ? $model->receiver->destination : '' }}</textarea>
                                     </div>
+                                    @error('receiver[destination]')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -194,19 +218,26 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Delivery Information</h3>
                                     @if ($model->exists)
-                                        <input type="hidden" class="form-control" name="delivery[id]" value="{{ $model->delivery->id }}">
+                                        <input type="hidden" class="form-control" name="delivery[id]" value="{{ $model->delivery->id }}" >
+                                        
                                     @endif
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="delivery_type">Delivery Name</label>
-                                        <input type="text" class="form-control" id="delivery_type" name="delivery[type]" @if ($model->exists) value="{{ $model->delivery->type }}" @endif placeholder="JNE">
+                                        <input type="text" class="form-control @error('delivery[type]') is-invalid @enderror" id="delivery_type" name="delivery[type]" @if ($model->exists) value="{{ $model->delivery->type }}" @endif placeholder="JNE" required>
                                     </div>
+                                    @error('delivery[type]')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <label for="delivery_do_date">DO Date</label>
-                                        <input type="datetime-local" class="form-control" id="delivery_do_date" name="delivery[do_date]" @if ($model->exists) value="{{ date('Y-m-d\TH:i:s', strtotime($model->delivery->do_date)) }}" @endif>
+                                        <input type="datetime-local" class="form-control @error('delivery[do_date]') is-invalid @enderror" id="delivery_do_date" name="delivery[do_date]" @if ($model->exists) value="{{ date('Y-m-d\TH:i:s', strtotime($model->delivery->do_date)) }}" @endif required>
                                     </div>
+                                    @error('delivery[do_date]')
+                                        <div class="alert alert-danger" >{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             @if ($model->exists && $model->received_by)
